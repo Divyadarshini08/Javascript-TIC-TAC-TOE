@@ -40,24 +40,31 @@ const checkWinner=()=>{
                 console.log(pos1+" Winner");
                 disableBtn();
                 winNote(pos1);
-            }
-            else if(count===9){
-                console.log("draw");
-                drawNote();
+                return
             }
         }
+    }
+    if(count===9){
+        console.log("draw");
+        drawNote();
     }
 };
 
 const winNote=(x)=>{
     congrats.innerHTML=`Congratulations to the Winner ${x}`;
     congrats.classList.remove("hide");
-}
+
+    confetti({
+        particleCount: 200,   // Number of particles
+        spread: 70,           // Spread area
+        origin: { y: 0.6 }    // Start from middle of screen
+    });
+};
 
 const drawNote=()=>{
     congrats.innerHTML="DRAW!  Restart again!!";
     congrats.classList.remove("hide");
-}
+};
 
 const disableBtn=()=>{
     boxes.forEach((btn)=>{
@@ -76,4 +83,4 @@ resetBtn.addEventListener("click",()=>{
     turn0=true;
     enableBtn();
     congrats.classList.add("hide");
-})
+});
